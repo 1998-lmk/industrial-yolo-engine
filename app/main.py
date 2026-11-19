@@ -53,7 +53,7 @@ async def detect(
 ):
     """
     Detect objects in an uploaded image or video using YOLO.
-
+ss
     - If an image is uploaded: returns the annotated image as JPEG.
     - If a video is uploaded: returns a JSON with a stream URL.
 
