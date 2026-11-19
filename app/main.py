@@ -2,7 +2,7 @@ from fastapi import FastAPI, UploadFile, File, Query, HTTPException, Request
 from fastapi.responses import StreamingResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-
+from pathlib import Path
 import io
 
 from .model_loader import load_models
@@ -19,12 +19,25 @@ app = FastAPI(
     version="1.0.0",
 )
 
+# 获取项目根目录
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# 静态文件目录
+STATIC_DIR = BASE_DIR / "static"
+
+# HTML模板目录
+TEMPLATES_DIR = BASE_DIR / "templates"
 # Serve static files (e.g., CSS, JS)
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount(
+    "/static",
+    StaticFiles(directory=str(STATIC_DIR)),
+    name="static"
+)
 
 # Jinja2 template engine setup
-templates = Jinja2Templates(directory="templates")
-
+templates = Jinja2Templates(
+    directory=str(TEMPLATES_DIR)
+)
 
 @app.get("/", response_class=HTMLResponse)
 async def home(request: Request):
