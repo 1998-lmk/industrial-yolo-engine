@@ -19,7 +19,7 @@ app = FastAPI(
     version="1.0.0",
 )
 
-# 获取项目根目录
+# 获取项目根目录s
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # 静态文件目录
